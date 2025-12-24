@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وشنة | المطعم السوري الأصيل</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Swiper JS CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Changa:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: rgb(118, 5, 24);
+            --primary-light: rgba(118, 5, 24, 0.8);
+            --primary-dark: rgb(80, 3, 16);
+            --secondary-color: #f8b500;
+            --secondary-light: #ffd166;
+            --accent-color: #2a2a2a;
+            --text-dark: #333333;
+            --text-light: #f8f9fa;
+            --bg-light: #fefefe;
+            --bg-dark: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Changa', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'El Messiri', serif;
+            font-weight: 700;
+        }
+
+        /* شريط التنعل المميز */
+        .navbar {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
+            padding: 10px 0;
+            transition: all 0.4s ease;
+            border-bottom: 3px solid var(--secondary-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-color) !important;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-img {
+            height: 60px;
+            margin-left: 15px;
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .contact-info i {
+            color: var(--secondary-color);
+            margin-left: 8px;
+        }
+
+        .contact-btn-nav {
+            background: var(--secondary-color);
+            color: var(--primary-dark);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+        }
+
+        .contact-btn-nav:hover {
+            background: var(--secondary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 600;
+            margin: 0 10px;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 8px 15px !important;
+            border-radius: 5px;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color) !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link.active {
+            color: var(--secondary-color) !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* السلايدر الرئيسي */
+        .hero-slider {
+            height: 85vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+            max-width: 800px;
+        }
+
+        .slide-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-text {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+
+        .btn-order {
+            background: linear-gradient(to right, var(--secondary-color), var(--secondary-light));
+            color: var(--primary-dark);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-order:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            color: var(--primary-dark);
+        }
+
+        /* أقسام المنيو السريعة */
+        .menu-quick-links {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #5b0312 0%, #ffffff 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            color: #f8b500;
+            position: relative;
+            font-size: 2.8rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 5px;
+            background: var(--secondary-color);
+            bottom: -15px;
+            right: 50%;
+            transform: translateX(50%);
+            border-radius: 5px;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            height: 100%;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .menu-card-image {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .menu-card-body {
+            padding: 25px;
+        }
+
+        .menu-card-title {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .menu-card-text {
+            color: #666;
+            margin-bottom: 20px;
+            min-height: 80px;
+        }
+
+        .btn-menu {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-menu:hover {
+            background: var(--primary-dark);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(118, 5, 24, 0.3);
+        }
+
+        /* قسم الوجبات المميزة */
+        .featured-dishes {
+            padding: 80px 0;
+            background-color: #600413;
+        }
+
+        .dish-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            margin-bottom: 30px;
+            border: 1px solid #eee;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .dish-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .dish-body {
+            padding: 20px;
+        }
+
+        .dish-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .dish-price {
+            font-weight: 700;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .dish-description {
+            color: #777;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            min-height: 70px;
+        }
+
+        .dish-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .dish-tag {
+            background: rgba(118, 5, 24, 0.1);
+            color: var(--primary-color);
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* قسم العروض */
+        .offers-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .offer-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: 100%;
+        }
+
+        .offer-card:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .offer-icon {
+            font-size: 3.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+        }
+
+        .offer-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--secondary-light);
+        }
+
+        .offer-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .offer-price span {
+            font-size: 1.2rem;
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-left: 10px;
+        }
+
+        .offer-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        /* زرين الواتساب والمكالمات الثابتين */
+        .fixed-contact-buttons {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-btn {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            position: relative;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+
+        .call-btn {
+            background: linear-gradient(135deg, #34B7F1, #0d8bd9);
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .contact-btn-tooltip {
+            position: absolute;
+            right: 75px;
+            background: var(--accent-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover .contact-btn-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 85px;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* الفوتر */
+        .footer {
+            background: linear-gradient(to right, #630414, #333);
+
+            color: var(--text-light);
+            padding: 70px 0 30px;
+        }
+
+        .footer-title {
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+            bottom: 0;
+            right: 0;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-right: 15px;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-right: 20px;
+        }
+
+        .footer-links a::before {
+            content: '›';
+            position: absolute;
+            right: 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover::before {
+            opacity: 1;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 45px;
+            margin-left: 10px;
+            color: #ccc;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-icons a:hover {
+            background: var(--secondary-color);
+            color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* تأثيرات إضافية */
+        .floating-element {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(248, 181, 0, 0.1) 0%, rgba(248, 181, 0, 0) 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .floating-element-1 {
+            top: 10%;
+            right: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-element-2 {
+            bottom: 20%;
+            left: -100px;
+            animation: float 10s ease-in-out infinite 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        /* التجاوب مع الشاشات المختلفة */
+        @media (max-width: 768px) {
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .contact-info {
+                display: none;
+            }
+            
+            .fixed-contact-buttons {
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .contact-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/images/logo.png" alt="وشنة" class="logo-img">
+                <span>وشنة</span>
+            </a>
+            
+            <div class="d-none d-lg-flex align-items-center">
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <span>9200 12345</span>
+                </div>
+                <div class="contact-info me-4">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>الرياض، حي الصحافة</span>
+                </div>
+                <button class="contact-btn-nav" onclick="window.location.href='contact.html'">
+                    <i class="fas fa-headset me-2"></i>خدمة العملاء
+                </button>
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">الرئيسية</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            قوائم الطعام
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="breakfast.html">منيو الإفطار</a></li>
+                            <li><a class="dropdown-item" href="lunch.html">منيو الغداء</a></li>
+                            <li><a class="dropdown-item" href="dinner.html">منيو العشاء</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="offers.html">العروض</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">عن وشنة</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">اتصل بنا</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- زرين الواتساب والمكالمات الثابتين -->
+    <div class="fixed-contact-buttons">
+        <a href="https://wa.me/966500000000" class="contact-btn whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            <div class="contact-btn-tooltip">راسلنا على واتساب</div>
+        </a>
+        <a href="tel:+966500000000" class="contact-btn call-btn">
+            <i class="fas fa-phone-alt"></i>
+            <div class="contact-btn-tooltip">اتصل بنا الآن</div>
+        </a>
+    </div>
+
+    <!-- السلايدر الرئيسي -->
+    <section class="hero-slider">
+        <div class="floating-element floating-element-1"></div>
+        <div class="floating-element floating-element-2"></div>
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <!-- الشريحة الأولى -->
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" class="slide-image" alt="مطعم وشنة">
+                    <div class="slide-content">
+                        <h1 class="slide-title">أهلاً بكم في وشنة</h1>
+                        <p class="slide-text">نقدم لكم أشهى الأطباق السورية بأيدٍ ماهرة وذوق رفيع، حيث ندمج بين الأصالة والحداثة لنمنحكم تجربة طعام لا تنسى.</p>
+                        <button class="btn btn-order" onclick="window.location.href='lunch.html'">اطلب الآن</button>
+                    </div>
+                </div>
+                <!-- الشريحة الثانية -->
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" class="slide-image" alt="أطباق سورية">
+                    <div class="slide-content">
+                        <h1 class="slide-title">أصالة الطعم السوري</h1>
+                        <p class="slide-text">أطباقنا مستوحاة من تراث المطبخ السوري العريق، مع لمسات عصرية تتناسب مع الذوق الحديث.</p>
+                        <button class="btn btn-order" onclick="window.location.href='dinner.html'">استعرض القائمة</button>
+                    </div>
+                </div>
+                <!-- الشريحة الثالثة -->
+                <!-- <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" class="slide-image" alt="عروض خاصة">
+                    <div class="slide-content">
+                        <h1 class="slide-title">عروض خاصة حصرية</h1>
+                        <p class="slide-text">استفد من عروضنا المميزة على الوجبات العائلية والطلبات الكبيرة. خصومات تصل إلى 30%.</p>
+                        <button class="btn btn-order" onclick="window.location.href='offers.html'">عروض اليوم</button>
+                    </div>
+                </div> -->
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- أقسام المنيو السريعة -->
+    <section class="menu-quick-links">
+        <div class="container">
+            <h2 class="section-title">قوائم الطعام</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="menu-card-image" alt="الإفطار">
+                        <div class="menu-card-body">
+                            <h3 class="menu-card-title">منيو الإفطار</h3>
+                            <p class="menu-card-text">ابدأ يومك مع وجبة إفطار سورية كاملة: فول، حمص، مسبحة، بيض بلدي، زعتر وزيت، وجبنة عكاوي. مع مشروبات ساخنة من القهوة والشاي.</p>
+                            <button class="btn btn-menu" onclick="window.location.href='breakfast.html'">استعرض القائمة</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1563379091339-03246963d9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="menu-card-image" alt="الغداء">
+                        <div class="menu-card-body">
+                            <h3 class="menu-card-title">منيو الغداء</h3>
+                            <p class="menu-card-text">وجبات غداء كاملة تشمل: منسف، كباب حلب، شيش طاووق، محاشي، ورق عنب، مقلوبة، ومعجنات سورية مع السلطات والمقبلات.</p>
+                            <button class="btn btn-menu" onclick="window.location.href='lunch.html'">استعرض القائمة</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="menu-card-image" alt="العشاء">
+                        <div class="menu-card-body">
+                            <h3 class="menu-card-title">منيو العشاء</h3>
+                            <p class="menu-card-text">أجواء عشاء ساحرة مع: مشاوي متنوعة، مقبلات ساخنة، معجنات بالجبن واللحم، حلويات سورية أصيلة، ومشروبات منعشة.</p>
+                            <button class="btn btn-menu" onclick="window.location.href='dinner.html'">استعرض القائمة</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الوجبات المميزة -->
+    <section class="featured-dishes">
+        <div class="container">
+            <h2 class="section-title">الوجبات المميزة</h2>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="dish-image" alt="منسف">
+                        <div class="dish-body">
+                            <h4 class="dish-title">منسف سوري</h4>
+                            <div class="dish-price">85 ر.س</div>
+                            <p class="dish-description">لحم ضأن مع الأرز واللبن واللوز والصنوبر، طبق أصيل من المطبخ السوري.</p>
+                            <div class="dish-tags">
+                                <span class="dish-tag">وجبة عائلية</span>
+                                <span class="dish-tag">أكثر طلباً</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="dish-image" alt="كباب حلب">
+                        <div class="dish-body">
+                            <h4 class="dish-title">كباب حلب</h4>
+                            <div class="dish-price">65 ر.س</div>
+                            <p class="dish-description">لحم ضأن مشوي مع البهارات الخاصة بحلب، يقدم مع الأرز والسلطة.</p>
+                            <div class="dish-tags">
+                                <span class="dish-tag">مشويات</span>
+                                <span class="dish-tag">الأكثر مبيعاً</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1604909052743-94e838986d24?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="dish-image" alt="محاشي">
+                        <div class="dish-body">
+                            <h4 class="dish-title">محاشي سورية</h4>
+                            <div class="dish-price">55 ر.س</div>
+                            <p class="dish-description">كوسا وباذنجان وبطاطا محشية بالأرز واللحم، مع صلصة الطماطم.</p>
+                            <div class="dish-tags">
+                                <span class="dish-tag">أطباق نباتية</span>
+                                <span class="dish-tag">وجبة خفيفة</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="dish-card">
+                        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="dish-image" alt="كنافة">
+                        <div class="dish-body">
+                            <h4 class="dish-title">كنافة نابلسية</h4>
+                            <div class="dish-price">35 ر.س</div>
+                            <p class="dish-description">كنافة محشية بالجبن ومرشوشة بالفستق الحلبي، تقدم ساخنة.</p>
+                            <div class="dish-tags">
+                                <span class="dish-tag">حلويات</span>
+                                <span class="dish-tag">الأفضل تقييماً</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- العروض -->
+    <section class="offers-section">
+        <div class="container">
+            <h2 class="section-title" style="color: #f8b500;">أفضل العروض</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="offer-card">
+                        <div class="offer-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="offer-title">عرض العائلة</h3>
+                        <div class="offer-price">199 ر.س <span>240 ر.س</span></div>
+                        <p class="offer-description">وجبة كاملة لعائلة مكونة من 4 أشخاص: مشاوي متنوعة، أرز، سلطات، مشروبات، وحلويات.</p>
+                        <button class="btn btn-order" onclick="window.location.href='offers.html'">اطلب الآن</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="offer-card">
+                        <div class="offer-icon">
+                            <i class="fas fa-hamburger"></i>
+                        </div>
+                        <h3 class="offer-title">عرض الإفطار</h3>
+                        <div class="offer-price">49 ر.س <span>65 ر.س</span></div>
+                        <p class="offer-description">إفطار سوري كامل لشخصين: فول، حمص، بيض، جبنة، زيتون، وخبز طازج.</p>
+                        <button class="btn btn-order" onclick="window.location.href='breakfast.html'">اطلب الآن</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="offer-card">
+                        <div class="offer-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3 class="offer-title">خصم 25%</h3>
+                        <div class="offer-price">على أول طلب</div>
+                        <p class="offer-description">احصل على خصم 25% على أول طلب عبر التطبيق أو الموقع. استخدم كود: WESHNA25</p>
+                        <button class="btn btn-order" onclick="window.location.href='offers.html'">استخدم الكود</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-5">
+                    <h3 class="footer-title">مطعم وشنة</h3>
+                    <p>أصالة الطعم السوري في قلب السعودية، نقدم لكم أشهى الأطباق السورية بأيدٍ ماهرة وذوق رفيع. نلتزم بجودة المكونات ونظافة التحضير.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-snapchat"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-5">
+                    <h3 class="footer-title">روابط سريعة</h3>
+                    <div class="footer-links">
+                        <a href="index.html">الرئيسية</a>
+                        <a href="about.html">عن وشنة</a>
+                        <a href="offers.html">العروض</a>
+                        <a href="contact.html">اتصل بنا</a>
+                        <a href="contact.html">خدمة العملاء</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h3 class="footer-title">قوائم الطعام</h3>
+                    <div class="footer-links">
+                        <a href="breakfast.html">منيو الإفطار</a>
+                        <a href="lunch.html">منيو الغداء</a>
+                        <a href="dinner.html">منيو العشاء</a>
+                        <a href="offers.html">العروض الخاصة</a>
+                        <a href="offers.html">الوجبات العائلية</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h3 class="footer-title">تواصل معنا</h3>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-map-marker-alt me-2">&nbsp;</i>الرياض، حي الصحافة، شارع الملك فهد</p>
+                        <p><i class="fas fa-phone me-2">&nbsp;</i>9200 12345</p>
+                        <p><i class="fas fa-envelope me-2">&nbsp;</i>info@weshna.com</p>
+                        <p><i class="fas fa-clock me-2">&nbsp;</i>من 10 صباحاً حتى 2 صباحاً</p>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; مطعم وشنة 2023 | تم التطوير بواسطة فريق وشنة</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    
+    <!-- JavaScript الخاص بالموقع -->
+    <script>
+        // تهيئة السلايدر
+        const swiper = new Swiper('.swiper', {
+            direction: 'horizontal',
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+        });
+
+        // تنعيم التمرير للروابط الداخلية
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // تغيير لون الشريط العلوي عند التمرير
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '5px 0';
+                navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
+            } else {
+                navbar.style.padding = '10px 0';
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // إضافة تأثير للعناصر عند الظهور
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // تطبيق تأثير الظهور على العناصر
+        document.querySelectorAll('.menu-card, .dish-card, .offer-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // إظهار رسالة عند النقر على زر الطلب
+        document.querySelectorAll('.btn-order').forEach(button => {
+            button.addEventListener('click', function() {
+                // يمكن هنا إضافة وظيفة الطلب الفعلية
+                console.log('تم النقر على زر الطلب');
+            });
+        });
+    </script>
+</body>
+</html>
