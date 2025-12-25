@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا | وشنة</title>
+    <!-- نفس الروابط السابقة -->
+    <style>
+        .contact-page-header {
+            background: linear-gradient(rgba(118, 5, 24, 0.9), rgba(80, 3, 16, 0.9)), url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0 80px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .contact-section {
+            padding: 80px 0;
+            background-color: var(--bg-color);
+        }
+        
+        .contact-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+        
+        .contact-form {
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-control {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(118, 5, 24, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(118, 5, 24, 0.25);
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-info-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-10px);
+        }
+        
+        .contact-icon {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+        
+        .contact-details h4 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .social-contact {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        
+        .social-contact a {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-contact .instagram { background: linear-gradient(45deg, #E1306C, #C13584); }
+        .social-contact .twitter { background: linear-gradient(45deg, #1DA1F2, #1A91DA); }
+        .social-contact .snapchat { background: linear-gradient(45deg, #FFFC00, #FFD700); color: #000; }
+        .social-contact .tiktok { background: linear-gradient(45deg, #000000, #25F4EE); }
+        
+        .social-contact a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .map-container {
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .working-hours {
+            background: rgba(248, 181, 0, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .working-hours h4 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .hours-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .hours-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(118, 5, 24, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .day {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .time {
+            color: #222;
+            font-weight: 500;
+        }
+        
+        .faq-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .faq-question {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            color: #eee;
+            display: none;
+        }
+        
+        .faq-answer.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/images/logo.png" alt="وشنة" class="logo-img">
+                <div class="brand-text">
+                    <span class="restaurant-name">وشنة</span>
+                    <span class="customer-service-text">خدمة العملاء</span>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">الرئيسية</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            قوائم الطعام
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="breakfast.html">منيو الإفطار</a></li>
+                            <li><a class="dropdown-item" href="lunch.html">منيو الغداء</a></li>
+                            <li><a class="dropdown-item" href="dinner.html">منيو العشاء</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#categories">الأقسام</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="offers.html">العروض</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#location">الموقع</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">عن وشنة</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">اتصل بنا</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- زرين الواتساب والمكالمات الثابتين -->
+    <div class="fixed-contact-buttons">
+        <a href="https://wa.me/966500000000?text=مرحباً، أريد التواصل مع خدمة عملاء وشنة" class="contact-btn whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+966500000000" class="contact-btn call-btn">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+    </div>
+
+    <!-- هيدر الصفحة -->
+    <section class="contact-page-header">
+        <div class="container">
+            <h1 class="page-title">اتصل بنا</h1>
+            <p class="page-subtitle">نحن هنا للإجابة على جميع استفساراتك وطلباتك</p>
+            <button class="btn btn-order" onclick="sendToWhatsApp('أريد التواصل مع خدمة العملاء')">تواصل معنا الآن</button>
+        </div>
+    </section>
+
+    <!-- قسم التواصل -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <div class="contact-card">
+                        <h2 class="category-title" style="text-align: right;">أرسل لنا رسالة</h2>
+                        <form class="contact-form" id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name" class="form-label" style="color: #222; font-weight: 600;">الاسم الكامل</label>
+                                        <input type="text" class="form-control" id="name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone" class="form-label" style="color: #222; font-weight: 600;">رقم الجوال</label>
+                                        <input type="tel" class="form-control" id="phone" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label" style="color: #222; font-weight: 600;">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" class="form-label" style="color: #222; font-weight: 600;">الموضوع</label>
+                                <select class="form-control" id="subject" required>
+                                    <option value="">اختر الموضوع</option>
+                                    <option value="استفسار">استفسار عام</option>
+                                    <option value="شكوى">شكوى أو اقتراح</option>
+                                    <option value="طلب">طلب خاص</option>
+                                    <option value="توظيف">طلب توظيف</option>
+                                    <option value="تعاون">فرص تعاون</option>
+                                    <option value="أخرى">أخرى</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="form-label" style="color: #222; font-weight: 600;">الرسالة</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-menu" style="width: auto; padding: 12px 40px;">
+                                <i class="fas fa-paper-plane me-2"></i>إرسال الرسالة
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="contact-card">
+                        <h2 class="category-title" style="text-align: right;">معلومات التواصل</h2>
+                        
+                        <div class="contact-info-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <div class="contact-details">
+                                <h4>العنوان</h4>
+                                <p style="color: #222;">الرياض، حي الصحافة، شارع الملك فهد</p>
+                                <button class="btn btn-sm btn-primary mt-2" onclick="copyToClipboard('الرياض، حي الصحافة، شارع الملك فهد')">
+                                    <i class="fas fa-copy me-1"></i>نسخ العنوان
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <i class="fas fa-phone contact-icon"></i>
+                            <div class="contact-details">
+                                <h4>هواتف التواصل</h4>
+                                <p style="color: #222;">9200 12345</p>
+                                <p style="color: #222;">055 123 4567</p>
+                                <p style="color: #222;">خدمة العملاء: 800 123 4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <div class="contact-details">
+                                <h4>البريد الإلكتروني</h4>
+                                <p style="color: #222;">info@weshna.com</p>
+                                <p style="color: #222;">support@weshna.com</p>
+                                <p style="color: #222;">careers@weshna.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="working-hours">
+                            <h4><i class="fas fa-clock me-2"></i>ساعات العمل</h4>
+                            <ul class="hours-list">
+                                <li>
+                                    <span class="day">الأحد - الخميس</span>
+                                    <span class="time">10:00 ص - 2:00 ص</span>
+                                </li>
+                                <li>
+                                    <span class="day">الجمعة</span>
+                                    <span class="time">12:00 ظ - 3:00 ص</span>
+                                </li>
+                                <li>
+                                    <span class="day">السبت</span>
+                                    <span class="time">12:00 ظ - 3:00 ص</span>
+                                </li>
+                                <li>
+                                    <span class="day">خدمة التوصيل</span>
+                                    <span class="time">24 ساعة</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="social-contact">
+                            <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="snapchat"><i class="fab fa-snapchat"></i></a>
+                            <a href="#" class="tiktok"><i class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الخريطة -->
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.676814139264!2d46.71668207512714!3d24.810852877952476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2efc7f7e8b12e5%3A0x12bc34c6e4e5f0b!2z2KfZhNiv2YrYp9mKINin2YTYtNmK2Lkg2KfZhNi52KfYr9mK!5e0!3m2!1sar!2ssa!4v1690836784564!5m2!1sar!2ssa" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- الأسئلة الشائعة -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">الأسئلة الشائعة</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleAnswer(this)">
+                            <span>ما هي ساعات العمل في مطعم وشنة؟</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>نحن نعمل يومياً من 10 صباحاً حتى 2 صباحاً، وفي عطلة نهاية الأسبوع من 12 ظهراً حتى 3 صباحاً. خدمة التوصيل متاحة 24 ساعة.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleAnswer(this)">
+                            <span>هل تقدمون خدمة التوصيل؟ وما هي المناطق المشمولة؟</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>نعم، نقدم خدمة توصيل مجانية للطلبات فوق 100 ريال داخل الرياض. التوصيل متاح لمعظم أحياء الرياض الرئيسية.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleAnswer(this)">
+                            <span>كيف يمكنني الحجز لمجموعة كبيرة؟</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>يمكنك الاتصال بنا على الرقم 9200 12345 لحجز طاولات للمجموعات الكبيرة. ننصح بالحجز المسبق للحفلات والمناسبات.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleAnswer(this)">
+                            <span>هل تقدمون خيارات للوجبات النباتية؟</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>نعم، لدينا مجموعة متنوعة من الوجبات النباتية مثل المحاشي، ورق العنب، المتبل، والسلطات المتنوعة.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleAnswer(this)">
+                            <span>ما هي وسائل الدفع المتاحة؟</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>نقبل الدفع نقداً، وبالبطاقات الإئتمانية، وبطاقات الصراف الآلي، والدفع عبر تطبيقات الدفع الإلكتروني.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleAnswer(this)">
+                            <span>هل يمكنني تعديل الطلب بعد إرساله؟</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>يمكنك تعديل الطلب خلال 10 دقائق من إرساله عبر الاتصال بنا على 9200 12345. بعد ذلك، يبدأ فريقنا في التحضير.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-5">
+                    <h3 class="footer-title">مطعم وشنة</h3>
+                    <p>نحن هنا لخدمتكم على مدار الساعة. لا تتردد في التواصل معنا لأي استفسار.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-snapchat"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-5">
+                    <h3 class="footer-title">خدمة العملاء</h3>
+                    <div class="footer-links">
+                        <a href="contact.html#faq">الأسئلة الشائعة</a>
+                        <a href="contact.html#form">اتصل بنا</a>
+                        <a href="#">الشكاوى والاقتراحات</a>
+                        <a href="#">سياسة الخصوصية</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h3 class="footer-title">معلومات</h3>
+                    <div class="footer-links">
+                        <a href="index.html">الرئيسية</a>
+                        <a href="about.html">عن وشنة</a>
+                        <a href="index.html#location">الموقع</a>
+                        <a href="offers.html">العروض</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h3 class="footer-title">خدماتنا</h3>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-phone me-2"></i>خدمة العملاء: 9200 12345</p>
+                        <p><i class="fas fa-truck me-2"></i>التوصيل: 24 ساعة</p>
+                        <p><i class="fas fa-credit-card me-2"></i>جميع وسائل الدفع</p>
+                        <p><i class="fas fa-wheelchair me-2"></i>مخصص لذوي الاحتياجات الخاصة</p>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; مطعم وشنة 2023 | خدمة العملاء: 9200 12345</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function sendToWhatsApp(message) {
+            const phoneNumber = '966500000000';
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+        }
+
+        // نسخ النص
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('تم نسخ النص: ' + text);
+            });
+        }
+
+        // تبديل عرض إجابة الأسئلة
+        function toggleAnswer(questionElement) {
+            const answer = questionElement.nextElementSibling;
+            const icon = questionElement.querySelector('i');
+            
+            if (answer.classList.contains('show')) {
+                answer.classList.remove('show');
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                answer.classList.add('show');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        }
+
+        // إرسال نموذج الاتصال
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            const fullMessage = `اسم: ${name}\nهاتف: ${phone}\nبريد: ${email}\nموضوع: ${subject}\nرسالة: ${message}`;
+            
+            sendToWhatsApp(fullMessage);
+            
+            // إظهار رسالة نجاح
+            alert('شكراً لتواصلكم! سيتم إعادة توجيهك إلى واتساب لإرسال رسالتك.');
+            
+            // إعادة تعيين النموذج
+            document.getElementById('contactForm').reset();
+        });
+
+        // إضافة تأثيرات للصفحة
+        const contactItems = document.querySelectorAll('.contact-info-item');
+        contactItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(20px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        contactItems.forEach(item => observer.observe(item));
+    </script>
+</body>
+</html>

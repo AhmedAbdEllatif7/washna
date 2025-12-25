@@ -22,8 +22,8 @@
             --accent-color: #2a2a2a;
             --text-dark: #333333;
             --text-light: #f8f9fa;
-            --bg-light: #fefefe;
-            --bg-dark: #1a1a1a;
+            --bg-color: #760518;
+            --card-bg: #f7f5f5;
         }
 
         * {
@@ -34,8 +34,8 @@
 
         body {
             font-family: 'Changa', sans-serif;
-            color: var(--text-dark);
-            background-color: var(--bg-light);
+            color: var(--text-light);
+            background-color: var(--bg-color);
             line-height: 1.8;
             overflow-x: hidden;
         }
@@ -45,7 +45,7 @@
             font-weight: 700;
         }
 
-        /* شريط التنعل المميز */
+        /* شريط التنقل المميز */
         .navbar {
             background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
             padding: 10px 0;
@@ -69,6 +69,58 @@
             filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
         }
 
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .restaurant-name {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+        }
+
+        /* إخفاء نص خدمة العملاء في الموبايل */
+        @media (max-width: 991px) {
+            .customer-service-text {
+                display: none;
+            }
+        }
+
+        .customer-service-text {
+            font-size: 0.8rem;
+            color: #ffd166;
+            margin-top: -5px;
+        }
+
+        @media (max-width: 768px) {
+            .brand-text {
+                margin-right: 10px;
+            }
+            
+            .restaurant-name {
+                font-size: 1.5rem;
+            }
+        }
+
+        .mobile-customer-service {
+            display: none;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-left: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-customer-service:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 991px) {
+            .mobile-customer-service {
+                display: block;
+            }
+        }
+
         .contact-info {
             display: flex;
             align-items: center;
@@ -90,12 +142,54 @@
             font-weight: 600;
             transition: all 0.3s ease;
             margin-right: 15px;
+            animation: pulse-gold 2s infinite;
         }
 
         .contact-btn-nav:hover {
             background: var(--secondary-light);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(248, 181, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(248, 181, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(248, 181, 0, 0); }
+        }
+
+        /* تعديل القائمة المنسدلة في الموبايل */
+        .navbar-nav .dropdown-menu {
+            text-align: right;
+            background: var(--primary-dark);
+            border: 1px solid var(--secondary-color);
+        }
+
+        .navbar-nav .dropdown-item {
+            color: var(--text-light);
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .dropdown-item:hover {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            padding-right: 30px;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-nav .dropdown-menu {
+                position: static !important;
+                float: none !important;
+                width: 100% !important;
+                margin-top: 0 !important;
+                background: rgba(80, 3, 16, 0.95);
+                border: none;
+            }
+            
+            .navbar-nav .dropdown-toggle::after {
+                float: left;
+                margin-top: 8px;
+            }
         }
 
         .nav-link {
@@ -153,6 +247,7 @@
             text-align: center;
             padding: 0 20px;
             max-width: 800px;
+            animation: fadeInUp 1s ease-out;
         }
 
         .slide-title {
@@ -179,6 +274,7 @@
             font-size: 1.1rem;
             transition: all 0.3s ease;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            animation: bounce 2s infinite;
         }
 
         .btn-order:hover {
@@ -187,18 +283,35 @@
             color: var(--primary-dark);
         }
 
-        /* أقسام المنيو السريعة */
-        .menu-quick-links {
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* قسم التابات الرئيسي */
+        .tabs-section {
             padding: 80px 0;
-            background: linear-gradient(135deg, #5b0312 0%, #ffffff 100%);
+            background-color: var(--bg-color);
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             color: #f8b500;
             position: relative;
             font-size: 2.8rem;
+            animation: fadeIn 1s ease-out;
         }
 
         .section-title::after {
@@ -213,14 +326,253 @@
             border-radius: 5px;
         }
 
-        .menu-card {
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* تصميم التابات */
+        .tabs-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .tabs-header {
+            display: flex;
+            background: var(--primary-dark);
+            border-bottom: 3px solid var(--secondary-color);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .tabs-header::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 120px;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            padding: 20px 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tab-btn:first-child {
+            border-left: none;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--secondary-light);
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .tab-btn i {
+            margin-left: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* تصميم التابات للموبايل */
+        @media (max-width: 768px) {
+            .tabs-header {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                border-left: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: right;
+                padding: 15px 20px;
+                min-width: 100%;
+            }
+            
+            .tab-btn.active::after {
+                bottom: 0;
+                right: 0;
+                left: auto;
+                width: 5px;
+                height: 100%;
+            }
+        }
+
+        /* محتوى التابات */
+        .tab-content {
+            display: none;
+            padding: 40px;
+            animation: fadeInTab 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInTab {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        /* تصميم الكاردس داخل التابات (مصغرة) */
+        .small-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 1200px) {
+            .small-card-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .small-card {
             background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .small-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .small-card-image {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .small-card-image:hover {
+            transform: scale(1.05);
+        }
+
+        .small-card-body {
+            padding: 20px;
+        }
+
+        .small-card-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .small-card-price {
+            font-weight: 700;
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .small-card-description {
+            color: #222;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+            min-height: 60px;
+        }
+
+        .small-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .small-card-tag {
+            background: rgba(118, 5, 24, 0.1);
+            color: var(--primary-color);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .small-card-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .small-card-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(118, 5, 24, 0.3);
+        }
+
+        /* الكاردس الأصلية (للعروض والأقسام) */
+        .menu-card {
+            background: var(--card-bg);
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             transition: all 0.4s ease;
             height: 100%;
             border-top: 5px solid var(--primary-color);
+            animation: slideInLeft 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .menu-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .menu-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .menu-card:hover {
@@ -232,6 +584,12 @@
             height: 250px;
             width: 100%;
             object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-card-image:hover {
+            transform: scale(1.05);
         }
 
         .menu-card-body {
@@ -246,9 +604,10 @@
         }
 
         .menu-card-text {
-            color: #666;
+            color: #222;
             margin-bottom: 20px;
             min-height: 80px;
+            font-weight: 500;
         }
 
         .btn-menu {
@@ -269,75 +628,6 @@
             box-shadow: 0 5px 15px rgba(118, 5, 24, 0.3);
         }
 
-        /* قسم الوجبات المميزة */
-        .featured-dishes {
-            padding: 80px 0;
-            background-color: #600413;
-        }
-
-        .dish-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            height: 100%;
-            margin-bottom: 30px;
-            border: 1px solid #eee;
-        }
-
-        .dish-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-        }
-
-        .dish-image {
-            height: 200px;
-            width: 100%;
-            object-fit: cover;
-        }
-
-        .dish-body {
-            padding: 20px;
-        }
-
-        .dish-title {
-            font-size: 1.4rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .dish-price {
-            font-weight: 700;
-            color: var(--secondary-color);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .dish-description {
-            color: #777;
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            min-height: 70px;
-        }
-
-        .dish-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .dish-tag {
-            background: rgba(118, 5, 24, 0.1);
-            color: var(--primary-color);
-            padding: 3px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
         /* قسم العروض */
         .offers-section {
             padding: 80px 0;
@@ -354,6 +644,22 @@
             transition: all 0.4s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
             height: 100%;
+            animation: zoomIn 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .offer-card:nth-child(2) { animation-delay: 0.2s; }
+        .offer-card:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .offer-card:hover {
@@ -392,6 +698,134 @@
             font-size: 1rem;
             opacity: 0.9;
             margin-bottom: 25px;
+        }
+
+        /* قسم الأقسام */
+        .categories-section {
+            padding: 80px 0;
+            background-color: var(--bg-color);
+        }
+
+        .category-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            cursor: pointer;
+            height: 100%;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .category-description {
+            color: #222;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        /* قسم اللوكيشن */
+        .location-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .location-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .location-title {
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .location-details {
+            margin-bottom: 30px;
+        }
+
+        .location-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .location-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-left: 15px;
+            margin-top: 5px;
+        }
+
+        .copy-location-btn {
+            background: var(--secondary-color);
+            color: var(--primary-dark);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-location-btn:hover {
+            background: var(--secondary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .copy-notification {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            background: var(--secondary-color);
+            color: var(--primary-dark);
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            z-index: 2000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            display: none;
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         /* زرين الواتساب والمكالمات الثابتين */
@@ -459,10 +893,79 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
+        /* نافذة عرض الصور */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .modal-content {
+                max-width: 70%;
+                max-height: 80%;
+                object-fit: contain;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .image-modal {
+                padding: 20px;
+                align-items: flex-start;
+                padding-top: 80px;
+            }
+            
+            .modal-content {
+                width: 100%;
+                height: auto;
+                max-height: 70vh;
+                object-fit: contain;
+            }
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 2001;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            color: var(--secondary-color);
+            background: rgba(0, 0, 0, 0.7);
+        }
+
         /* الفوتر */
         .footer {
-            background: linear-gradient(to right, #630414, #333);
-
+            background: linear-gradient(to right, var(--primary-dark), #333);
             color: var(--text-light);
             padding: 70px 0 30px;
         }
@@ -593,31 +1096,43 @@
                 height: 55px;
                 font-size: 1.6rem;
             }
+            
+            .location-card {
+                padding: 25px;
+            }
+            
+            .location-title {
+                font-size: 1.8rem;
+            }
+            
+            .small-card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
         }
     </style>
 </head>
 <body>
+    <!-- نافذة عرض الصور -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-modal" onclick="closeImageModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- إشعار نسخ العنوان -->
+    <div id="copyNotification" class="copy-notification">
+        <i class="fas fa-check-circle me-2"></i>تم نسخ العنوان بنجاح
+    </div>
+
     <!-- شريط التنقل -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <img src="assets/images/logo.png" alt="وشنة" class="logo-img">
-                <span>وشنة</span>
+                <div class="brand-text">
+                    <span class="restaurant-name">وشنة</span>
+                </div>
             </a>
-            
-            <div class="d-none d-lg-flex align-items-center">
-                <div class="contact-info">
-                    <i class="fas fa-phone"></i>
-                    <span>9200 12345</span>
-                </div>
-                <div class="contact-info me-4">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>الرياض، حي الصحافة</span>
-                </div>
-                <button class="contact-btn-nav" onclick="window.location.href='contact.html'">
-                    <i class="fas fa-headset me-2"></i>خدمة العملاء
-                </button>
-            </div>
+
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -638,7 +1153,13 @@
                         </ul>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#categories">الأقسام</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="offers.html">العروض</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#location">الموقع</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about.html">عن وشنة</a>
@@ -653,9 +1174,9 @@
 
     <!-- زرين الواتساب والمكالمات الثابتين -->
     <div class="fixed-contact-buttons">
-        <a href="https://wa.me/966500000000" class="contact-btn whatsapp-btn" target="_blank">
+        <a href="https://wa.me/966500000000?text=مرحباً، أريد طلب وجبة من مطعم وشنة" class="contact-btn whatsapp-btn" target="_blank">
             <i class="fab fa-whatsapp"></i>
-            <div class="contact-btn-tooltip">راسلنا على واتساب</div>
+            <div class="contact-btn-tooltip">اطلب عبر واتساب</div>
         </a>
         <a href="tel:+966500000000" class="contact-btn call-btn">
             <i class="fas fa-phone-alt"></i>
@@ -675,7 +1196,7 @@
                     <div class="slide-content">
                         <h1 class="slide-title">أهلاً بكم في وشنة</h1>
                         <p class="slide-text">نقدم لكم أشهى الأطباق السورية بأيدٍ ماهرة وذوق رفيع، حيث ندمج بين الأصالة والحداثة لنمنحكم تجربة طعام لا تنسى.</p>
-                        <button class="btn btn-order" onclick="window.location.href='lunch.html'">اطلب الآن</button>
+                        <button class="btn btn-order" onclick="sendToWhatsApp('أريد الحصول على قائمة الطعام الكاملة')">اطلب الآن</button>
                     </div>
                 </div>
                 <!-- الشريحة الثانية -->
@@ -684,18 +1205,9 @@
                     <div class="slide-content">
                         <h1 class="slide-title">أصالة الطعم السوري</h1>
                         <p class="slide-text">أطباقنا مستوحاة من تراث المطبخ السوري العريق، مع لمسات عصرية تتناسب مع الذوق الحديث.</p>
-                        <button class="btn btn-order" onclick="window.location.href='dinner.html'">استعرض القائمة</button>
+                        <button class="btn btn-order" onclick="sendToWhatsApp('أريد معرفة العروض المتاحة اليوم')">اطلب الآن</button>
                     </div>
                 </div>
-                <!-- الشريحة الثالثة -->
-                <!-- <div class="swiper-slide">
-                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" class="slide-image" alt="عروض خاصة">
-                    <div class="slide-content">
-                        <h1 class="slide-title">عروض خاصة حصرية</h1>
-                        <p class="slide-text">استفد من عروضنا المميزة على الوجبات العائلية والطلبات الكبيرة. خصومات تصل إلى 30%.</p>
-                        <button class="btn btn-order" onclick="window.location.href='offers.html'">عروض اليوم</button>
-                    </div>
-                </div> -->
             </div>
             <div class="swiper-pagination"></div>
             <div class="swiper-button-next"></div>
@@ -703,102 +1215,256 @@
         </div>
     </section>
 
-    <!-- أقسام المنيو السريعة -->
-    <section class="menu-quick-links">
+    <!-- قسم التابات الرئيسي -->
+    <section class="tabs-section">
         <div class="container">
-            <h2 class="section-title">قوائم الطعام</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="menu-card">
-                        <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="menu-card-image" alt="الإفطار">
-                        <div class="menu-card-body">
-                            <h3 class="menu-card-title">منيو الإفطار</h3>
-                            <p class="menu-card-text">ابدأ يومك مع وجبة إفطار سورية كاملة: فول، حمص، مسبحة، بيض بلدي، زعتر وزيت، وجبنة عكاوي. مع مشروبات ساخنة من القهوة والشاي.</p>
-                            <button class="btn btn-menu" onclick="window.location.href='breakfast.html'">استعرض القائمة</button>
-                        </div>
-                    </div>
+            <h2 class="section-title">اكتشف وشنة</h2>
+            
+            <div class="tabs-container">
+                <!-- رؤوس التابات -->
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="tab1">
+                        <i class="fas fa-utensils"></i>قوائم الطعام
+                    </button>
+                    <button class="tab-btn" data-tab="tab2">
+                        <i class="fas fa-star"></i>الوجبات المميزة
+                    </button>
+                    <button class="tab-btn" data-tab="tab3">
+                        <i class="fas fa-th-large"></i>أقسام المطعم
+                    </button>
                 </div>
-                <div class="col-md-4">
-                    <div class="menu-card">
-                        <img src="https://images.unsplash.com/photo-1563379091339-03246963d9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="menu-card-image" alt="الغداء">
-                        <div class="menu-card-body">
-                            <h3 class="menu-card-title">منيو الغداء</h3>
-                            <p class="menu-card-text">وجبات غداء كاملة تشمل: منسف، كباب حلب، شيش طاووق، محاشي، ورق عنب، مقلوبة، ومعجنات سورية مع السلطات والمقبلات.</p>
-                            <button class="btn btn-menu" onclick="window.location.href='lunch.html'">استعرض القائمة</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="menu-card">
-                        <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="menu-card-image" alt="العشاء">
-                        <div class="menu-card-body">
-                            <h3 class="menu-card-title">منيو العشاء</h3>
-                            <p class="menu-card-text">أجواء عشاء ساحرة مع: مشاوي متنوعة، مقبلات ساخنة، معجنات بالجبن واللحم، حلويات سورية أصيلة، ومشروبات منعشة.</p>
-                            <button class="btn btn-menu" onclick="window.location.href='dinner.html'">استعرض القائمة</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- الوجبات المميزة -->
-    <section class="featured-dishes">
-        <div class="container">
-            <h2 class="section-title">الوجبات المميزة</h2>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="dish-card">
-                        <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="dish-image" alt="منسف">
-                        <div class="dish-body">
-                            <h4 class="dish-title">منسف سوري</h4>
-                            <div class="dish-price">85 ر.س</div>
-                            <p class="dish-description">لحم ضأن مع الأرز واللبن واللوز والصنوبر، طبق أصيل من المطبخ السوري.</p>
-                            <div class="dish-tags">
-                                <span class="dish-tag">وجبة عائلية</span>
-                                <span class="dish-tag">أكثر طلباً</span>
+                
+                <!-- محتوى التابات -->
+                <div class="tabs-content">
+                    <!-- تاب 1: قوائم الطعام -->
+                    <div id="tab1" class="tab-content active" style="background: #7a1e2e;">
+                        <h3 class="tab-title" style="color: #f8b500;">قوائم الطعام</h3>
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="menu-card">
+                                    <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                         class="menu-card-image" 
+                                         alt="الإفطار" 
+                                         onclick="openImageModal(this.src)">
+                                    <div class="menu-card-body">
+                                        <h3 class="menu-card-title">منيو الإفطار</h3>
+                                        <p class="menu-card-text">ابدأ يومك مع وجبة إفطار سورية كاملة: فول، حمص، مسبحة، بيض بلدي، زعتر وزيت، وجبنة عكاوي.</p>
+                                        <button class="btn btn-menu" onclick="window.location.href='breakfast.html'">
+                                            <i class="fas fa-coffee me-2"></i>استعرض القائمة
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="menu-card">
+                                    <img src="https://images.unsplash.com/photo-1563379091339-03246963d9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                         class="menu-card-image" 
+                                         alt="الغداء" 
+                                         onclick="openImageModal(this.src)">
+                                    <div class="menu-card-body">
+                                        <h3 class="menu-card-title">منيو الغداء</h3>
+                                        <p class="menu-card-text">وجبات غداء كاملة تشمل: منسف، كباب حلب، شيش طاووق، محاشي، ورق عنب، مقلوبة، ومعجنات سورية.</p>
+                                        <button class="btn btn-menu" onclick="window.location.href='lunch.html'">
+                                            <i class="fas fa-utensils me-2"></i>استعرض القائمة
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="menu-card">
+                                    <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                         class="menu-card-image" 
+                                         alt="العشاء" 
+                                         onclick="openImageModal(this.src)">
+                                    <div class="menu-card-body">
+                                        <h3 class="menu-card-title">منيو العشاء</h3>
+                                        <p class="menu-card-text">أجواء عشاء ساحرة مع: مشاوي متنوعة، مقبلات ساخنة، معجنات بالجبن واللحم، حلويات سورية أصيلة.</p>
+                                        <button class="btn btn-menu" onclick="window.location.href='dinner.html'">
+                                            <i class="fas fa-moon me-2"></i>استعرض القائمة
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="dish-card">
-                        <img src="https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="dish-image" alt="كباب حلب">
-                        <div class="dish-body">
-                            <h4 class="dish-title">كباب حلب</h4>
-                            <div class="dish-price">65 ر.س</div>
-                            <p class="dish-description">لحم ضأن مشوي مع البهارات الخاصة بحلب، يقدم مع الأرز والسلطة.</p>
-                            <div class="dish-tags">
-                                <span class="dish-tag">مشويات</span>
-                                <span class="dish-tag">الأكثر مبيعاً</span>
+                    
+                    <!-- تاب 2: الوجبات المميزة -->
+                    <div id="tab2" class="tab-content" style="background: #7a1e2e;">
+                        <h3 class="tab-title" style="color: #f8b500;">الوجبات المميزة</h3>
+                        <div class="small-card-grid">
+                            <!-- وجبة 1 -->
+                            <div class="small-card">
+                                <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     class="small-card-image" 
+                                     alt="منسف" 
+                                     onclick="openImageModal(this.src)">
+                                <div class="small-card-body">
+                                    <h4 class="small-card-title">منسف سوري</h4>
+                                    <div class="small-card-price">85 ر.س</div>
+                                    <p class="small-card-description">لحم ضأن مع الأرز واللبن واللوز والصنوبر، طبق أصيل من المطبخ السوري.</p>
+                                    <div class="small-card-tags">
+                                        <span class="small-card-tag">وجبة عائلية</span>
+                                        <span class="small-card-tag">أكثر طلباً</span>
+                                    </div>
+                                    <button class="small-card-btn" onclick="sendToWhatsApp('أريد طلب منسف سوري')">اطلب الآن</button>
+                                </div>
+                            </div>
+                            
+                            <!-- وجبة 2 -->
+                            <div class="small-card">
+                                <img src="https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     class="small-card-image" 
+                                     alt="كباب حلب" 
+                                     onclick="openImageModal(this.src)">
+                                <div class="small-card-body">
+                                    <h4 class="small-card-title">كباب حلب</h4>
+                                    <div class="small-card-price">65 ر.س</div>
+                                    <p class="small-card-description">لحم ضأن مشوي مع البهارات الخاصة بحلب، يقدم مع الأرز والسلطة.</p>
+                                    <div class="small-card-tags">
+                                        <span class="small-card-tag">مشويات</span>
+                                        <span class="small-card-tag">الأكثر مبيعاً</span>
+                                    </div>
+                                    <button class="small-card-btn" onclick="sendToWhatsApp('أريد طلب كباب حلب')">اطلب الآن</button>
+                                </div>
+                            </div>
+                            
+                            <!-- وجبة 3 -->
+                            <div class="small-card">
+                                <img src="https://images.unsplash.com/photo-1604909052743-94e838986d24?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     class="small-card-image" 
+                                     alt="محاشي" 
+                                     onclick="openImageModal(this.src)">
+                                <div class="small-card-body">
+                                    <h4 class="small-card-title">محاشي سورية</h4>
+                                    <div class="small-card-price">55 ر.س</div>
+                                    <p class="small-card-description">كوسا وباذنجان وبطاطا محشية بالأرز واللحم، مع صلصة الطماطم.</p>
+                                    <div class="small-card-tags">
+                                        <span class="small-card-tag">أطباق نباتية</span>
+                                        <span class="small-card-tag">وجبة خفيفة</span>
+                                    </div>
+                                    <button class="small-card-btn" onclick="sendToWhatsApp('أريد طلب محاشي سورية')">اطلب الآن</button>
+                                </div>
+                            </div>
+                            
+                            <!-- وجبة 4 -->
+                            <div class="small-card">
+                                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     class="small-card-image" 
+                                     alt="كنافة" 
+                                     onclick="openImageModal(this.src)">
+                                <div class="small-card-body">
+                                    <h4 class="small-card-title">كنافة نابلسية</h4>
+                                    <div class="small-card-price">35 ر.س</div>
+                                    <p class="small-card-description">كنافة محشية بالجبن ومرشوشة بالفستق الحلبي، تقدم ساخنة.</p>
+                                    <div class="small-card-tags">
+                                        <span class="small-card-tag">حلويات</span>
+                                        <span class="small-card-tag">الأفضل تقييماً</span>
+                                    </div>
+                                    <button class="small-card-btn" onclick="sendToWhatsApp('أريد طلب كنافة نابلسية')">اطلب الآن</button>
+                                </div>
+                            </div>
+                            
+                            <!-- وجبة 5 -->
+                            <div class="small-card">
+                                <img src="https://images.unsplash.com/photo-1559054663-e8d23213f55c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     class="small-card-image" 
+                                     alt="شيش طاووق" 
+                                     onclick="openImageModal(this.src)">
+                                <div class="small-card-body">
+                                    <h4 class="small-card-title">شيش طاووق</h4>
+                                    <div class="small-card-price">55 ر.س</div>
+                                    <p class="small-card-description">دجاج مشوي مع البهارات الخاصة، يقدم مع الثوم والبطاطا والصلصة.</p>
+                                    <div class="small-card-tags">
+                                        <span class="small-card-tag">دجاج</span>
+                                        <span class="small-card-tag">وجبة خفيفة</span>
+                                    </div>
+                                    <button class="small-card-btn" onclick="sendToWhatsApp('أريد طلب شيش طاووق')">اطلب الآن</button>
+                                </div>
+                            </div>
+                            
+                            <!-- وجبة 6 -->
+                            <div class="small-card">
+                                <img src="https://images.unsplash.com/photo-1563379091339-03246963d9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     class="small-card-image" 
+                                     alt="مقلوبة" 
+                                     onclick="openImageModal(this.src)">
+                                <div class="small-card-body">
+                                    <h4 class="small-card-title">مقلوبة</h4>
+                                    <div class="small-card-price">60 ر.س</div>
+                                    <p class="small-card-description">أرز مع الباذنجان واللحم والخضار، طبق تقليدي يقدم مقلوباً.</p>
+                                    <div class="small-card-tags">
+                                        <span class="small-card-tag">تقليدي</span>
+                                        <span class="small-card-tag">وجبة كاملة</span>
+                                    </div>
+                                    <button class="small-card-btn" onclick="sendToWhatsApp('أريد طلب مقلوبة')">اطلب الآن</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="dish-card">
-                        <img src="https://images.unsplash.com/photo-1604909052743-94e838986d24?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="dish-image" alt="محاشي">
-                        <div class="dish-body">
-                            <h4 class="dish-title">محاشي سورية</h4>
-                            <div class="dish-price">55 ر.س</div>
-                            <p class="dish-description">كوسا وباذنجان وبطاطا محشية بالأرز واللحم، مع صلصة الطماطم.</p>
-                            <div class="dish-tags">
-                                <span class="dish-tag">أطباق نباتية</span>
-                                <span class="dish-tag">وجبة خفيفة</span>
+                    
+                    <!-- تاب 3: أقسام المطعم -->
+                    <div id="tab3" class="tab-content" style="background: #7a1e2e;">
+                        <h3 class="tab-title" style="color: #f8b500;">أقسام المطعم</h3>
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="category-card" onclick="window.location.href='breakfast.html'">
+                                    <div class="category-icon">
+                                        <i class="fas fa-coffee"></i>
+                                    </div>
+                                    <h3 class="category-title">قسم الإفطار</h3>
+                                    <p class="category-description">وجبات إفطار سورية كاملة مع أفضل أنواع الفول والحمص والجبن والعسل.</p>
+                                    <button class="btn btn-menu">تصفح القائمة</button>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="dish-card">
-                        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="dish-image" alt="كنافة">
-                        <div class="dish-body">
-                            <h4 class="dish-title">كنافة نابلسية</h4>
-                            <div class="dish-price">35 ر.س</div>
-                            <p class="dish-description">كنافة محشية بالجبن ومرشوشة بالفستق الحلبي، تقدم ساخنة.</p>
-                            <div class="dish-tags">
-                                <span class="dish-tag">حلويات</span>
-                                <span class="dish-tag">الأفضل تقييماً</span>
+                            <div class="col-md-4">
+                                <div class="category-card" onclick="window.location.href='lunch.html'">
+                                    <div class="category-icon">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <h3 class="category-title">قسم الغداء</h3>
+                                    <p class="category-description">أطباق الغداء الرئيسية من المنسف والمشاوي والمحاشي والأطباق التقليدية.</p>
+                                    <button class="btn btn-menu">تصفح القائمة</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="category-card" onclick="window.location.href='dinner.html'">
+                                    <div class="category-icon">
+                                        <i class="fas fa-moon"></i>
+                                    </div>
+                                    <h3 class="category-title">قسم العشاء</h3>
+                                    <p class="category-description">مشاوي عربية ومعجنات وحلويات سورية أصيلة لأجواء عشاء مميزة.</p>
+                                    <button class="btn btn-menu">تصفح القائمة</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="category-card" onclick="window.location.href='offers.html'">
+                                    <div class="category-icon">
+                                        <i class="fas fa-percentage"></i>
+                                    </div>
+                                    <h3 class="category-title">العروض الخاصة</h3>
+                                    <p class="category-description">عروض مميزة على الوجبات العائلية والمناسبات مع خصومات تصل إلى 30%.</p>
+                                    <button class="btn btn-menu">شاهد العروض</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="category-card" onclick="openImageModal('https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                                    <div class="category-icon">
+                                        <i class="fas fa-ice-cream"></i>
+                                    </div>
+                                    <h3 class="category-title">الحلويات</h3>
+                                    <p class="category-description">أشهى الحلويات السورية من الكنافة والبقلاوة والمعمول والمشروبات الباردة.</p>
+                                    <button class="btn btn-menu">شاهد القائمة</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="category-card" onclick="openImageModal('https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                                    <div class="category-icon">
+                                        <i class="fas fa-fire"></i>
+                                    </div>
+                                    <h3 class="category-title">المشاوي</h3>
+                                    <p class="category-description">مشاوي عربية أصيلة من الكباب والشيش طاووق والكفتة بأجود أنواع اللحوم.</p>
+                                    <button class="btn btn-menu">شاهد القائمة</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -820,7 +1486,7 @@
                         <h3 class="offer-title">عرض العائلة</h3>
                         <div class="offer-price">199 ر.س <span>240 ر.س</span></div>
                         <p class="offer-description">وجبة كاملة لعائلة مكونة من 4 أشخاص: مشاوي متنوعة، أرز، سلطات، مشروبات، وحلويات.</p>
-                        <button class="btn btn-order" onclick="window.location.href='offers.html'">اطلب الآن</button>
+                        <button class="btn btn-order" onclick="sendToWhatsApp('أريد الاستفادة من عرض العائلة')">اطلب الآن</button>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -831,7 +1497,7 @@
                         <h3 class="offer-title">عرض الإفطار</h3>
                         <div class="offer-price">49 ر.س <span>65 ر.س</span></div>
                         <p class="offer-description">إفطار سوري كامل لشخصين: فول، حمص، بيض، جبنة، زيتون، وخبز طازج.</p>
-                        <button class="btn btn-order" onclick="window.location.href='breakfast.html'">اطلب الآن</button>
+                        <button class="btn btn-order" onclick="sendToWhatsApp('أريد الاستفادة من عرض الإفطار')">اطلب الآن</button>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -842,7 +1508,67 @@
                         <h3 class="offer-title">خصم 25%</h3>
                         <div class="offer-price">على أول طلب</div>
                         <p class="offer-description">احصل على خصم 25% على أول طلب عبر التطبيق أو الموقع. استخدم كود: WESHNA25</p>
-                        <button class="btn btn-order" onclick="window.location.href='offers.html'">استخدم الكود</button>
+                        <button class="btn btn-order" onclick="sendToWhatsApp('أريد استخدام كود الخصم WESHNA25')">استخدم الكود</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم اللوكيشن -->
+    <section class="location-section" id="location">
+        <div class="container">
+            <div class="location-card">
+                <h2 class="location-title">موقعنا</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="location-details">
+                            <div class="location-item">
+                                <i class="fas fa-map-marker-alt location-icon"></i>
+                                <div>
+                                    <h4 style="color: var(--secondary-color); margin-bottom: 5px;">العنوان</h4>
+                                    <p id="locationText">الرياض، حي الصحافة، شارع الملك فهد، بجوار مركز الراشد التجاري</p>
+                                    <button class="copy-location-btn" onclick="copyLocation()">
+                                        <i class="fas fa-copy"></i> نسخ العنوان
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="location-item">
+                                <i class="fas fa-clock location-icon"></i>
+                                <div>
+                                    <h4 style="color: var(--secondary-color); margin-bottom: 5px;">ساعات العمل</h4>
+                                    <p>الأحد - الخميس: 10:00 صباحاً - 2:00 صباحاً</p>
+                                    <p>الجمعة - السبت: 12:00 ظهراً - 3:00 صباحاً</p>
+                                </div>
+                            </div>
+                            <div class="location-item">
+                                <i class="fas fa-phone location-icon"></i>
+                                <div>
+                                    <h4 style="color: var(--secondary-color); margin-bottom: 5px;">اتصل بنا</h4>
+                                    <p>9200 12345</p>
+                                    <p>055 123 4567</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- خريطة جوجل -->
+                        <div style="width: 100%; height: 300px; border-radius: 15px; overflow: hidden;">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.676814139264!2d46.71668207512714!3d24.810852877952476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2efc7f7e8b12e5%3A0x12bc34c6e4e5f0b!2z2KfZhNiv2YrYp9mKINin2YTYtNmK2Lkg2KfZhNi52KfYr9mK!5e0!3m2!1sar!2ssa!4v1690836784564!5m2!1sar!2ssa" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        <div class="mt-3 text-center">
+                            <a href="https://maps.google.com/?q=الرياض، حي الصحافة، شارع الملك فهد" target="_blank" class="btn btn-order" style="width: auto;">
+                                <i class="fas fa-directions me-2"></i> افتح في خرائط جوجل
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -869,7 +1595,7 @@
                         <a href="index.html">الرئيسية</a>
                         <a href="about.html">عن وشنة</a>
                         <a href="offers.html">العروض</a>
-                        <a href="contact.html">اتصل بنا</a>
+                        <a href="#location">الموقع</a>
                         <a href="contact.html">خدمة العملاء</a>
                     </div>
                 </div>
@@ -879,7 +1605,7 @@
                         <a href="breakfast.html">منيو الإفطار</a>
                         <a href="lunch.html">منيو الغداء</a>
                         <a href="dinner.html">منيو العشاء</a>
-                        <a href="offers.html">العروض الخاصة</a>
+                        <a href="#categories">الأقسام</a>
                         <a href="offers.html">الوجبات العائلية</a>
                     </div>
                 </div>
@@ -928,6 +1654,100 @@
             },
         });
 
+        // وظيفة إرسال طلب إلى واتساب
+        function sendToWhatsApp(message) {
+            const phoneNumber = '966500000000';
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+        }
+
+        // وظيفة فتح نافذة عرض الصور
+        function openImageModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            modalImg.src = imageSrc;
+            
+            // إضافة css إضافية للتحكم في الحجم حسب الجهاز
+            if (window.innerWidth <= 767) {
+                modalImg.style.maxWidth = '100%';
+                modalImg.style.maxHeight = '70vh';
+            } else {
+                modalImg.style.maxWidth = '70%';
+                modalImg.style.maxHeight = '80vh';
+            }
+        }
+
+        // وظيفة إغلاق نافذة عرض الصور
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // إغلاق النافذة عند النقر خارج الصورة
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                closeImageModal();
+            }
+        }
+
+        // إغلاق النافذة بالزر ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+
+        // وظيفة نسخ العنوان
+        function copyLocation() {
+            const locationText = document.getElementById('locationText').innerText;
+            navigator.clipboard.writeText(locationText).then(function() {
+                // إظهار إشعار النسخ
+                const notification = document.getElementById('copyNotification');
+                notification.style.display = 'block';
+                
+                // إخفاء الإشعار بعد 3 ثوان
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                }, 3000);
+                
+                // تأثير اهتزاز للزر
+                const copyButton = document.querySelector('.copy-location-btn');
+                copyButton.style.transform = 'scale(0.95)';
+                setTimeout(function() {
+                    copyButton.style.transform = '';
+                }, 200);
+            }).catch(function(err) {
+                console.error('فشل في نسخ النص: ', err);
+                alert('تعذر نسخ العنوان. يرجى المحاولة مرة أخرى.');
+            });
+        }
+
+        // وظيفة التابات
+        function initTabs() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // إزالة النشاط من جميع الأزرار والمحتوى
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // إضافة النشاط للزر والمحتوى المختار
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                    
+                    // تحريك المؤشر إلى التاب النشط في الموبايل
+                    if (window.innerWidth <= 768) {
+                        this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            });
+        }
+
         // تنعيم التمرير للروابط الداخلية
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -974,19 +1794,26 @@
         }, observerOptions);
 
         // تطبيق تأثير الظهور على العناصر
-        document.querySelectorAll('.menu-card, .dish-card, .offer-card').forEach(el => {
+        document.querySelectorAll('.menu-card, .offer-card, .category-card, .small-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
 
-        // إظهار رسالة عند النقر على زر الطلب
-        document.querySelectorAll('.btn-order').forEach(button => {
-            button.addEventListener('click', function() {
-                // يمكن هنا إضافة وظيفة الطلب الفعلية
-                console.log('تم النقر على زر الطلب');
-            });
+        // تهيئة التابات عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            initTabs();
+        });
+
+        // إضافة تأثيرات للصفحة عند التحميل
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
         });
     </script>
 </body>
